@@ -1,0 +1,17 @@
+package com.udacity.shoestore
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import com.udacity.shoestore.databinding.ActivityMainBinding
+import timber.log.Timber
+
+class MainActivity : AppCompatActivity() {
+        private var _binding: ActivityMainBinding? = null
+        private val binding: ActivityMainBinding get() = binding!!
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        _binding =DataBindingUtil.setContentView(this, R.layout.activity_main)
+        Timber.plant(Timber.DebugTree())
+    }
+}
