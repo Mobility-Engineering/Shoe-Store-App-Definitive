@@ -23,5 +23,4 @@ class InstructionsFragment : Fragment() {
         val root: View = binding.root
         return root
     }
-
 }
