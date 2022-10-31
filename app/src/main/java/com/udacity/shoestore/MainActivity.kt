@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding get() = binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
+        getSupportActionBar()?.setDisplayShowTitleEnabled(false);
         super.onCreate(savedInstanceState)
         shoeStoreViewModel = ViewModelProvider(this).get(ShoeStoreViewModel::class.java)
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
