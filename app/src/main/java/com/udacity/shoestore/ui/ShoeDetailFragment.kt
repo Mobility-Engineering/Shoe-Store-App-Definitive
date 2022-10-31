@@ -23,17 +23,19 @@ class ShoeDetailFragment : Fragment() {
 
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_detail, container, false)
+        binding.shoe = Shoe("",0.0, "","")
         binding.buttonCancel.setOnClickListener{
             it.findNavController().popBackStack()
         }
         binding.buttonSave.setOnClickListener {
-            shoeStoreViewModel.addShoe(binding.shoe)
+            shoeStoreViewModel.addShoe(binding.shoe as Shoe)
             it.findNavController().popBackStack()
         }
 

@@ -32,7 +32,7 @@
             android:ems="10"
             android:hint="Name"
             android:inputType="textPersonName"
-            android:text = "@{shoe.name}"
+            android:text = "@={shoe.name}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +54,7 @@
             android:ems="10"
             android:hint="Company"
             android:inputType="textPersonName"
-            android:text = "@{shoe.company}"
+            android:text = "@={shoe.company}"
             app:layout_constraintStart_toStartOf="@+id/editTextName"
             app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
@@ -66,7 +66,7 @@
             android:ems="10"
             android:hint="Size"
             android:inputType="number"
-            android:text = "@{String.valueOf(shoe.size)}"
+            android:text = "@={`` + shoe.size}"
             app:layout_constraintStart_toStartOf="@+id/editTextCompany"
             app:layout_constraintTop_toBottomOf="@+id/editTextCompany" />
 
@@ -97,7 +97,7 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="Description"
-            android:text="@{shoe.description"
+            android:text="@={shoe.description}"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="@+id/editTextSize"
             app:layout_constraintTop_toBottomOf="@+id/editTextSize" />

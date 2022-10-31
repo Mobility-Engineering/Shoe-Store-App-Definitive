@@ -5,11 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ShoeStoreViewModel: ViewModel() {
-
 val _shoeList = MutableLiveData<MutableList<Shoe>>(mutableListOf<Shoe>())
 val shoeList: LiveData<MutableList<Shoe>> get() = _shoeList
 
     fun addShoe(shoe:Shoe?){
-        shoe?.let{shoeList.value?.add(it)}
+        shoe?.let{_shoeList.value?.add(it)}
     }
 }
