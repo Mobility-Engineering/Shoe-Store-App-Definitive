@@ -1,16 +1,13 @@
 package com.udacity.shoestore.ui
 
 import android.os.Bundle
-import android.provider.ContactsContract
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
@@ -19,20 +16,45 @@ import com.udacity.shoestore.models.Shoe
 import com.udacity.shoestore.models.ShoeStoreViewModel
 
 class ShoeListFragment : Fragment() {
-
+    private lateinit var navController: NavController
     private var _binding: FragmentShoeListBinding? = null
     private val binding: FragmentShoeListBinding get() = _binding!!
     private var _shoeListItemBinding: ShoeListItemBinding? = null
     private val shoeListItemBinding: ShoeListItemBinding get() = _shoeListItemBinding!!
     private val shoeStoreViewModel by activityViewModels<ShoeStoreViewModel>()
     private lateinit var shoeView: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //
-
+        shoeStoreViewModel.shoeListFragmentActive = true
         val inflater = LayoutInflater.from(context)
         _shoeListItemBinding =
             DataBindingUtil.inflate(inflater, R.layout.shoe_list_item, null, false)
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        setHasOptionsMenu(true)
+        navController = container?.findNavController() as NavController
+        // Inflate the layout for this fragment
+        shoeStoreViewModel.shoeList.observe(viewLifecycleOwner) {
+            if (!it.isEmpty()) {
+                it.forEach { shoeItem -> addView(shoeItem) }
+            }
+        }
+        _binding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_shoe_list, container, false
+        )
+        binding.addFab.setOnClickListener {
+            //it.findNavController()
+            navController.navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment())
+        }
+        val root: View = binding.root
+        return root
     }
 
     fun addView(last: Shoe) {
@@ -45,26 +67,29 @@ class ShoeListFragment : Fragment() {
         binding.linearLayoutShoeList.addView(shoeView)
     }
 
+    override fun onResume() {
+        shoeStoreViewModel.shoeListFragmentActive = true
+        super.onResume()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        shoeStoreViewModel.shoeList.observe(viewLifecycleOwner) {
-            if (!it.isEmpty()) {
-                it.forEach { shoeItem -> addView(shoeItem) }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var id = item.itemId
+
+        when (id) {
+            R.id.action_logout -> {
+                shoeStoreViewModel.shoeListFragmentActive = false
+                navController.popBackStack()
+                navController.popBackStack()
+                navController.popBackStack()
+                return true
             }
         }
-        _binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_shoe_list, container, false
-        )
-        binding.addFab.setOnClickListener {
-            it.findNavController()
-                .navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment())
-        }
-
-        val root: View = binding.root
-        return root
+        return super.onOptionsItemSelected(item)
     }
 }
