@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <!-- LinearLayout is ideal for the stack alike view to be shown -->
+    <!-- LinearLayout is ideal for the stack view intended for a shoe item while benefiting from the rendering performance it characterizes it -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

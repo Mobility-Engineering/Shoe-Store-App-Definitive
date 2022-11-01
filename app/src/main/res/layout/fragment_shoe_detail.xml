@@ -4,7 +4,7 @@
         <variable name="shoe"
             type="com.udacity.shoestore.models.Shoe"/>
     </data>
-    
+    <!-- ConstraintLayout was  used for screen's inherent complexity and to grant a similar appearance on different screen sizes and orientation changes) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
