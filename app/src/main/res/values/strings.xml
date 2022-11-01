@@ -7,4 +7,5 @@
     <string name="instructions">Instructions</string>
     <string name="title_instructions">Instructions</string>
     <string name="shoe_store_instructions">On this app you can add multiple models of shoes, just press the button on the bottom left and describe the model on screen that will show!\nYou can later access the created shoe models by simply clicking on them</string>
+    <string name="log_out">Log out</string>
 </resources>
